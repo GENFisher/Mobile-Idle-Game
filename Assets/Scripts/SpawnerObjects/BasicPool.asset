@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0354c52b2561c45488f3a1d1be2fd422, type: 3}
+  m_Name: BasicPool
+  m_EditorClassIdentifier: Assembly-CSharp::TrashPool
+  trashTypes:
+  - {fileID: 11400000, guid: b836a7e63ae88f848a5de76d4e332500, type: 2}
+  - {fileID: 11400000, guid: 047553c293653a14ba122bd6f0b9bb43, type: 2}
