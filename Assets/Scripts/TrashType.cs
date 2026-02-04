@@ -1,9 +1,17 @@
 using UnityEngine;
 
+public enum RecycableType
+{
+    Plastic,
+    Metal
+}
+
 [CreateAssetMenu(menuName = "Trash/Trash Type")]
 public class TrashType : ScriptableObject
 {
-    public string trashId;
+    public new string name;
+
+    public RecycableType trashType;
 
     public GameObject prefab;
 

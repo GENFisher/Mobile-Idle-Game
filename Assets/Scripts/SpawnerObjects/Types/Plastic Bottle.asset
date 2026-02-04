@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caaf8e4c9907ce9478908a1d0940b4bc, type: 3}
-  m_Name: Plastic
+  m_Name: Plastic Bottle
   m_EditorClassIdentifier: Assembly-CSharp::TrashType
-  trashId: Platic
+  name: Plastic Bottle
+  trashType: 0
   prefab: {fileID: 1966561665830914519, guid: bc0e5cffc7255c84aa6b022878252e28, type: 3}
-  weight: 5
+  weight: 2
   scoreValue: 2
   lifetime: 0
   isRecyclable: 1

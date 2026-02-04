@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caaf8e4c9907ce9478908a1d0940b4bc, type: 3}
-  m_Name: Metal
+  m_Name: Metal Can
   m_EditorClassIdentifier: Assembly-CSharp::TrashType
-  trashId: Metal
+  name: Metal Can
+  trashType: 1
   prefab: {fileID: 7907035524950371449, guid: 389e73739962d1f498c4ad37d2620d02, type: 3}
-  weight: 1
+  weight: 2
   scoreValue: 5
   lifetime: 0
   isRecyclable: 1
