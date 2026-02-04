@@ -6,12 +6,20 @@ public class TrashItem : MonoBehaviour, IPointerDownHandler
 {
     public TrashType trashType;
     protected TrashSpawner spawner;
-    public static float speed = .5f;
     private bool isSlelected;
+    private float speed;
+
+    private void Awake()
+    {
+        speed = UpgradeManager.Instance.BeltSpeed;
+    }
 
     void Update()
     {
         transform.Translate(Vector3.down * speed * Time.deltaTime, Space.World);
+
+        // Experimental: speed changing
+        speed = UpgradeManager.Instance.BeltSpeed;
     }
 
     public void OnPointerDown(PointerEventData eventData)
