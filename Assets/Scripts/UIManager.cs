@@ -38,6 +38,11 @@ public class UIManager : MonoBehaviour
             moneyText.text = $"Money: {amount}";
         }
     }
+
+    public void TogglePanel(GameObject panel)
+    {
+        panel.SetActive(!panel.activeSelf);
+    }
 }
 
 

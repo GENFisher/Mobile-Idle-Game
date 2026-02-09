@@ -26,7 +26,7 @@ public class TrashSpawner : MonoBehaviour
             if (currentTrashCount < maxTrash)
                 SpawnTrash();
 
-            yield return new WaitForSeconds(UpgradeManager.Instance.SpawnInterval);
+            yield return new WaitForSeconds(UpgradeManager.Instance.GetCurrentValue(UpgradeType.SpawnInterval));
         }
     }
 

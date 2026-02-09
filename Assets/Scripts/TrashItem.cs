@@ -9,7 +9,7 @@ public class TrashItem : MonoBehaviour, IPointerDownHandler
 
     void Update()
     {
-        transform.Translate(Vector3.down * UpgradeManager.Instance.BeltSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.down * UpgradeManager.Instance.GetCurrentValue(UpgradeType.BeltSpeed) * Time.deltaTime, Space.World);
     }
 
     public void OnPointerDown(PointerEventData eventData)

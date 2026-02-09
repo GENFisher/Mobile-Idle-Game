@@ -23,12 +23,12 @@ public class RecyclableCan : MonoBehaviour, IPointerClickHandler
             {
                 if (trashSpawner.selectedObject.GetComponent<TrashItem>().trashType.trashType == acceptedType)
                 {
-                    EconomyManager.Instance.AddTrash(acceptedType, UpgradeManager.Instance.RecycleingYield);
+                    EconomyManager.Instance.AddTrash(acceptedType, (int)UpgradeManager.Instance.GetCurrentValue(UpgradeType.RecyclingYield));
                     Destroy(trashSpawner.selectedObject);
                 }
                 else
                 {
-                    EconomyManager.Instance.RemoveTrash(acceptedType, UpgradeManager.Instance.RecycleingPenalty);
+                    EconomyManager.Instance.RemoveTrash(acceptedType, (int)UpgradeManager.Instance.GetCurrentValue(UpgradeType.RecyclingPenalty));
                     Destroy(trashSpawner.selectedObject);
                 }
                 UIManager.Instance.UpdateAmount(acceptedType, EconomyManager.Instance.GetTrashAmount(acceptedType));

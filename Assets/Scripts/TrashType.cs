@@ -3,7 +3,9 @@ using UnityEngine;
 public enum RecycableType
 {
     Plastic,
-    Metal
+    Metal,
+    Paper,
+    Glass
 }
 
 [CreateAssetMenu(menuName = "Trash/Trash Type")]
