@@ -10,7 +10,9 @@ public class UIManager : MonoBehaviour
 
     private Dictionary<RecycableType, TMP_Text> uiMap;
 
-    [SerializeField]private TMP_Text moneyText;
+    [SerializeField] private TMP_Text moneyText;
+
+    public int buyAmount { get;private set; } = 1;
 
     private void Awake()
     {
@@ -42,6 +44,11 @@ public class UIManager : MonoBehaviour
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
+    }
+
+    public void SetBuyAmount(int amount)
+    {
+        buyAmount = amount;
     }
 }
 
