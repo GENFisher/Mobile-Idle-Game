@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,17 +7,22 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    private EconomyManager economyManager;
+
     [SerializeField] private List<TrashUIEntry> entries;
 
     private Dictionary<RecycableType, TMP_Text> uiMap;
 
     [SerializeField] private TMP_Text moneyText;
 
-    public int buyAmount { get;private set; } = 1;
+    public int buyAmount { get; private set; } = 1;
+
+    public event Action<int> OnBuyAmountChanged;
 
     private void Awake()
     {
         Instance = this;
+        economyManager = EconomyManager.Instance;
         uiMap = new Dictionary<RecycableType, TMP_Text>();
 
         foreach (var entry in entries)
@@ -49,11 +55,27 @@ public class UIManager : MonoBehaviour
     public void SetBuyAmount(int amount)
     {
         buyAmount = amount;
+        OnBuyAmountChanged?.Invoke(buyAmount);
+    }
+    private void OnEnable()
+    {
+        EconomyManager.Instance.OnMoneyChanged += OnMoneyChanged;
+        OnMoneyChanged(economyManager.GetMoney());
+    }
+
+    private void OnDisable()
+    {
+        EconomyManager.Instance.OnMoneyChanged -= OnMoneyChanged;
+    }
+
+    private void OnMoneyChanged(int newAmount) 
+    { 
+        moneyText.text = $"Money: {newAmount}"; 
     }
 }
 
 
-[System.Serializable]
+    [System.Serializable]
 public class TrashUIEntry
 {
     public RecycableType type;

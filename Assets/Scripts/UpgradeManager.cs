@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum UpgradeType
@@ -39,6 +40,8 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private int baseMixedTrashPriceUpgradeCost = 10;
     [SerializeField] private int baseRecyclingYieldUpgradeCost = 10;
     [SerializeField] private int baseRecyclingPenaltyUpgradeCost = 10;
+
+    public event Action<UpgradeType> OnUpgradePurchased;
 
     // Calculated properties based on levels
     public float GetCurrentValue(UpgradeType type)
@@ -153,7 +156,7 @@ public class UpgradeManager : MonoBehaviour
                 recyclingPenaltyLevel += upgradeLevels;
                 break;
         }
-        UIManager.Instance.UpdateMoney(EconomyManager.Instance.GetMoney());
+        OnUpgradePurchased?.Invoke(type);
     }
 
     // Convenience methods for UI buttons because it sometimes dont appear in the inspector when using enum parameters

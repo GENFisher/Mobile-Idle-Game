@@ -4,10 +4,14 @@ using UnityEngine.UI;
 
 public class UpgradeItemUI : MonoBehaviour
 {
+    private UpgradeManager upgradeManager;
+    private EconomyManager economyManager;
+    private UIManager uiManager;
+
     [Header("Upgrade info")]
-    private TMP_Text nameText;
-    private TMP_Text descriptionText;
-    [SerializeField] private string name;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private string title;
     [SerializeField] private string description;
     public UpgradeType upgradeType;
 
@@ -19,34 +23,67 @@ public class UpgradeItemUI : MonoBehaviour
 
     private void Awake()
     {
-        nameText = transform.Find("Title").GetComponent<TMP_Text>();
-        descriptionText = transform.Find("Description").GetComponent<TMP_Text>();
+        upgradeManager = UpgradeManager.Instance;
+        economyManager = EconomyManager.Instance;
+        uiManager = UIManager.Instance;
         Initialize();
     }
-    void Update()
-    {
-        UpdateButtonState(UIManager.Instance.buyAmount);
-    }
 
-    void UpdateButtonState(int amount)
+    void UpdateButtonState(int buyAmount)
     {
-        int cost = UpgradeManager.Instance.GetUpgradeCost(upgradeType, amount);
-        bool canAfford = EconomyManager.Instance.GetMoney() >= cost;
+        int cost = upgradeManager.GetUpgradeCost(upgradeType, buyAmount);
+        bool canAfford = economyManager.GetMoney() >= cost;
 
-        buyAmount.text = $"Buy {amount}";
+        this.buyAmount.text = $"Buy {buyAmount}";
         costOfUpgrade.text = $"Cost: {cost}";
-        impactOfUpgrade.text = $"{UpgradeManager.Instance.GetCurrentValue(upgradeType).ToString("F2")}->{UpgradeManager.Instance.GetUpgradePreview(upgradeType, amount).ToString("F1")}";
+        impactOfUpgrade.text = $"{upgradeManager.GetCurrentValue(upgradeType).ToString("F2")}->{upgradeManager.GetUpgradePreview(upgradeType, buyAmount).ToString("F2")}";
         upgradeButton.interactable = canAfford;
     }
 
     public void UpgradeOnButtonClick()
     {
-        UpgradeManager.Instance.Upgrade(upgradeType, UIManager.Instance.buyAmount);
+        upgradeManager.Upgrade(upgradeType, uiManager.buyAmount);
     }
 
     private void Initialize()
     {
-            nameText.text = name;
-            descriptionText.text = description;
+        nameText.text = title;
+        descriptionText.text = description;
+    }
+
+    private void OnEnable()
+    {
+        economyManager.OnMoneyChanged += OnMoneyChanged;
+        uiManager.OnBuyAmountChanged += OnBuyAmountChanged;
+        upgradeManager.OnUpgradePurchased += OnUpgradePurchased;
+        Refresh();
+    }
+
+    private void OnDisable()
+    {
+        economyManager.OnMoneyChanged -= OnMoneyChanged;
+        uiManager.OnBuyAmountChanged -= OnBuyAmountChanged;
+        upgradeManager.OnUpgradePurchased -= OnUpgradePurchased;
+    }
+
+    private void Refresh()
+    {
+        UpdateButtonState(uiManager.buyAmount);
+    }
+
+    private void OnMoneyChanged(int money)
+    { 
+        Refresh(); 
+    }
+
+    private void OnBuyAmountChanged(int buyAmount)
+    {
+        UpdateButtonState(buyAmount);
+    }
+
+    private void OnUpgradePurchased(UpgradeType type)
+    {
+        if (type == upgradeType)
+            Refresh();
     }
 }

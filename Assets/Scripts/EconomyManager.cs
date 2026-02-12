@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class EconomyManager : MonoBehaviour
     private int totalMoney = 0;
 
     private Dictionary<RecycableType, int> trashAmounts = new();
+
+    public event Action<int> OnMoneyChanged;
 
     private void Awake()
     {
@@ -29,12 +32,13 @@ public class EconomyManager : MonoBehaviour
     public void AddMoney(int amount) 
     { 
         totalMoney += amount;
-        UIManager.Instance.UpdateMoney(totalMoney);
+        OnMoneyChanged?.Invoke(totalMoney);
     }
 
     public void SpendMoney(int amount) 
     { 
         totalMoney -= amount;
+        OnMoneyChanged?.Invoke(totalMoney);
     }
 
 

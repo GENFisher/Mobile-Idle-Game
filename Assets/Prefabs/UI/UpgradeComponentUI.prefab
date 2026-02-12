@@ -388,8 +388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9714430d1d3c9f4687540cf79136347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeItemUI
-  name: 
-  description: 
+  nameText: {fileID: 1600709677563990685}
+  descriptionText: {fileID: 4368820302690152635}
+  title: 
+  description: Reduces the time between trash spawns
   upgradeType: 0
   upgradeButton: {fileID: 4567924488397963327}
   buyAmount: {fileID: 7487716787682427651}
