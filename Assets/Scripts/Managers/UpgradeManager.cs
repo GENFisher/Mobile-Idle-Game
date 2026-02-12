@@ -1,15 +1,6 @@
 using System;
 using UnityEngine;
 
-public enum UpgradeType
-{
-    SpawnInterval,
-    BeltSpeed,
-    MixedTrashPrice,
-    RecyclingYield,
-    RecyclingPenalty
-}
-
 public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance { get; private set; }

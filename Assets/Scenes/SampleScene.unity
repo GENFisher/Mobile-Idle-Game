@@ -212,6 +212,10 @@ PrefabInstance:
       value: Mixed price
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
+      propertyPath: title
+      value: Mixed money
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: description
       value: Increases the money you get when not recycling
       objectReference: {fileID: 0}
@@ -1215,6 +1219,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: name
+      value: Contamination
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
+      propertyPath: title
       value: Contamination
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
@@ -2896,8 +2904,8 @@ PrefabInstance:
       value: Spawn time
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
-      propertyPath: description
-      value: Reduces the time between trash spawns
+      propertyPath: title
+      value: Spawn interval
       objectReference: {fileID: 0}
     - target: {fileID: 1975961571038814380, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: name
@@ -3170,6 +3178,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: name
+      value: Belt speed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
+      propertyPath: title
       value: Belt speed
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
@@ -4524,6 +4536,10 @@ PrefabInstance:
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: name
       value: Recycling yield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
+      propertyPath: title
+      value: Trash yield
       objectReference: {fileID: 0}
     - target: {fileID: 1549699728298782282, guid: 18ab1757851a8ee4fbcac41d2ecd8e2f, type: 3}
       propertyPath: description
