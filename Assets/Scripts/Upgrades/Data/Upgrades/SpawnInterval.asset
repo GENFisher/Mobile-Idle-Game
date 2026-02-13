@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 0
   baseValue: 5
   baseCost: 10
-  effectGrowth: 1.1
+  effectGrowth: 0.9
   costGrowth: 1.15
   description: Reduces the time between trash spawns
   icon: {fileID: 0}

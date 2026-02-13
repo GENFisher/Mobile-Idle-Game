@@ -1,89 +1,89 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UpgradeItemUI : MonoBehaviour
 {
     private UpgradeManager upgradeManager;
     private EconomyManager economyManager;
-    private UIManager uiManager;
+    private UpgradePoolUI upgradePoolUI;
 
     [Header("Upgrade info")]
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text descriptionText;
-    [SerializeField] private string title;
-    [SerializeField] private string description;
     public UpgradeType upgradeType;
 
     [Header("Upgrade button")]
     [SerializeField] private Button upgradeButton;
-    [SerializeField] private TMP_Text buyAmount;
-    [SerializeField] private TMP_Text costOfUpgrade;
-    [SerializeField] private TMP_Text impactOfUpgrade;
+    [SerializeField] private TMP_Text costOfUpgradeText;
+    [SerializeField] private TMP_Text impactOfUpgradeText;
 
     private void Awake()
     {
         upgradeManager = UpgradeManager.Instance;
         economyManager = EconomyManager.Instance;
-        uiManager = UIManager.Instance;
-        Initialize();
+        upgradePoolUI = GetComponentInParent<UpgradePoolUI>();
     }
 
-    void UpdateButtonState(int buyAmount)
+    void UpdateButtonState()
     {
-        int cost = upgradeManager.GetUpgradeCost(upgradeType, buyAmount);
+        int multiplier = upgradePoolUI.GetMultiplier();
+        int cost = upgradeManager.GetCost(upgradeType, multiplier);
         bool canAfford = economyManager.GetMoney() >= cost;
 
-        this.buyAmount.text = $"Buy {buyAmount}";
-        costOfUpgrade.text = $"Cost: {cost}";
-        impactOfUpgrade.text = $"{upgradeManager.GetCurrentValue(upgradeType).ToString("F2")}->{upgradeManager.GetUpgradePreview(upgradeType, buyAmount).ToString("F2")}";
+        costOfUpgradeText.text = $"Cost: {cost}";
+        impactOfUpgradeText.text = $"{upgradeManager.GetCurrentValue(upgradeType).ToString("F2")}->{upgradeManager.GetUpgradePreview(upgradeType, multiplier).ToString("F2")}";
         upgradeButton.interactable = canAfford;
     }
 
     public void UpgradeOnButtonClick()
     {
-        upgradeManager.Upgrade(upgradeType, uiManager.buyAmount);
+        upgradeManager.Upgrade(upgradeType, upgradePoolUI.GetMultiplier());
     }
 
-    private void Initialize()
+    public void Initialize(UpgradeData data)
     {
-        nameText.text = title;
-        descriptionText.text = description;
+        nameText.text = data.upgradeName;
+        descriptionText.text = data.description;
+        upgradeType = data.type;
+        Refresh();
     }
 
     private void OnEnable()
     {
         economyManager.OnMoneyChanged += OnMoneyChanged;
-        uiManager.OnBuyAmountChanged += OnBuyAmountChanged;
         upgradeManager.OnUpgradePurchased += OnUpgradePurchased;
+        upgradePoolUI.OnMultiplierChanged += HandleMultiplierChanged;
         Refresh();
     }
 
     private void OnDisable()
     {
         economyManager.OnMoneyChanged -= OnMoneyChanged;
-        uiManager.OnBuyAmountChanged -= OnBuyAmountChanged;
         upgradeManager.OnUpgradePurchased -= OnUpgradePurchased;
+        upgradePoolUI.OnMultiplierChanged -= HandleMultiplierChanged;
     }
+
 
     private void Refresh()
     {
-        UpdateButtonState(uiManager.buyAmount);
+        UpdateButtonState();
     }
 
     private void OnMoneyChanged(int money)
     { 
-        Refresh(); 
-    }
-
-    private void OnBuyAmountChanged(int buyAmount)
-    {
-        UpdateButtonState(buyAmount);
+        Refresh();
     }
 
     private void OnUpgradePurchased(UpgradeType type)
     {
         if (type == upgradeType)
             Refresh();
+    }
+
+    private void HandleMultiplierChanged()
+    {
+        Refresh();
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 4
   baseValue: 10
   baseCost: 10
-  effectGrowth: 1.1
+  effectGrowth: 0.9
   costGrowth: 1.15
   description: Reduces the amount of trash lost when sorting incorrectly
   icon: {fileID: 0}

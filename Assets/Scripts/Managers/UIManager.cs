@@ -15,10 +15,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text moneyText;
 
-    public int buyAmount { get; private set; } = 1;
-
-    public event Action<int> OnBuyAmountChanged;
-
     private void Awake()
     {
         Instance = this;
@@ -50,12 +46,6 @@ public class UIManager : MonoBehaviour
     public void TogglePanel(GameObject panel)
     {
         panel.SetActive(!panel.activeSelf);
-    }
-
-    public void SetBuyAmount(int amount)
-    {
-        buyAmount = amount;
-        OnBuyAmountChanged?.Invoke(buyAmount);
     }
     private void OnEnable()
     {
